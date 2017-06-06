@@ -108,9 +108,7 @@ public class WebService {
 					r = new JSONObject(regsL.getString(i));
 					regs.add(new RegIN(i,r.getString("tag_rfid"), r.getString("nome"),r.getString("date_time"), r.getInt("status")));			
 				}
-			} //else{
-			//		regs.add(new RegIN(-1,"","", "",-1));		
-			//}
+			}
 		}
 		return regs;
 	}
