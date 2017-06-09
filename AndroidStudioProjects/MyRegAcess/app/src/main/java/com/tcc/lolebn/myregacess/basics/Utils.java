@@ -1,4 +1,4 @@
-package basics;
+package com.tcc.lolebn.myregacess.basics;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -91,24 +91,5 @@ public class Utils {
 		}
 		return null;
 	}
-	
-	public static void save(ArrayList<RegIN> array ) {
-		try{
-			String path="";
 
-			FileWriter arq = new FileWriter(path);
-		    PrintWriter gravarArq = new PrintWriter(arq);
-		 
-		    gravarArq.printf("REGISTROS%n");
-		    for (int i=0; i<array.size(); i++) {
-		      gravarArq.printf(getDTH(array.get(i).getData_hora())+ " " + array.get(i).getNome() +"%n");
-		    }
-		    gravarArq.printf("%n");
-		 
-		    arq.close();	
-
-		} catch (Exception e){
-			e.getMessage();
-			}
-	}
 }

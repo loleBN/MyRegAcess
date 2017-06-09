@@ -1,4 +1,4 @@
-package basics;
+package com.tcc.lolebn.myregacess.basics;
 
 public class RegIN {
 	private String tag_rfid;

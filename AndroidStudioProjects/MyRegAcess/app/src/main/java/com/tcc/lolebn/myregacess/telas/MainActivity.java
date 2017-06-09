@@ -1,4 +1,4 @@
-package com.tcc.lolebn.myregacess;
+package com.tcc.lolebn.myregacess.telas;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import com.tcc.lolebn.myregacess.R;
+import com.tcc.lolebn.myregacess.adapters.AdapterRegNow;
+import com.tcc.lolebn.myregacess.basics.RegIN;
+import com.tcc.lolebn.myregacess.webservice.DownloadRegistrosNow;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,6 +51,19 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        List<RegIN> lregs  = new ArrayList<>();
+        try {
+            lregs = new DownloadRegistrosNow(this).execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        ListView listViewReg = (ListView) findViewById(R.id.lvStatusIn);
+        AdapterRegNow adapter = new AdapterRegNow(lregs,this);
+        listViewReg.setAdapter(adapter);
+
     }
 
     @Override
@@ -83,18 +106,16 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
 
-            Intent i = new Intent(this, Perfil.class);
-            startActivity(i);
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+            Intent i = new Intent(this, ListPorData.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_slideshow) {
+            Intent i = new Intent(this, ListPorSemana.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
 
