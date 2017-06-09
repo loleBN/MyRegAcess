@@ -4,13 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.tcc.lolebn.myregacess.R;
 import com.tcc.lolebn.myregacess.adapters.AdapterRegPorData;
 import com.tcc.lolebn.myregacess.basics.RegIN;
-import com.tcc.lolebn.myregacess.basics.Utils;
-import com.tcc.lolebn.myregacess.webservice.DownloadRegistroPorData;
 import com.tcc.lolebn.myregacess.webservice.DownloadRegistroPorSemana;
 
 import java.util.ArrayList;

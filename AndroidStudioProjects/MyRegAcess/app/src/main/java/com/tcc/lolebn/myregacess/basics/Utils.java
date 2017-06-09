@@ -35,7 +35,7 @@ public class Utils {
         return date;
     }
 	public static String getSoMes(Date dateInString) {
-        DateFormat format = new SimpleDateFormat("MM/yyyy");
+        DateFormat format = new SimpleDateFormat("MM");
         String mes = null;
         try {
             mes = format.format(dateInString);

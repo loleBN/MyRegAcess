@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tcc.lolebn.myregacess">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,8 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".telas.ListPorData"></activity>
-        <activity android:name=".telas.ListPorSemana"></activity>
+        <activity android:name=".telas.ListPorData" />
+        <activity android:name=".telas.ListPorSemana" />
+        <activity android:name=".telas.ListPorMes"></activity>
     </application>
 
 </manifest>
