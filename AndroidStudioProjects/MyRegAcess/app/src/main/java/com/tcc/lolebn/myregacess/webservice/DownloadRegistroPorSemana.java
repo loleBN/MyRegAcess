@@ -25,10 +25,11 @@ import java.util.Date;
  * Created by lolebn on 08/06/17.
  */
 
-public class DownloadRegistroPorSemana extends AsyncTask<Void, Void, ArrayList<RegIN>> {
+public class DownloadRegistroPorSemana extends AsyncTask<Date, Void, ArrayList<RegIN>> {
     ProgressDialog dialog;
     Context c;
     public static ArrayList<RegIN> registrosArray;
+
 
     public DownloadRegistroPorSemana(Context c) {
         this.c = c;
@@ -43,22 +44,21 @@ public class DownloadRegistroPorSemana extends AsyncTask<Void, Void, ArrayList<R
 
 
     @Override
-    protected ArrayList<RegIN> doInBackground(Void... params) {
-        String server_response;
+    protected ArrayList<RegIN> doInBackground(Date... params) {
         Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
+        cal.setTime(params[0]);
         int day = cal.get(Calendar.DAY_OF_WEEK);
         Log.e("day",""+day);
         cal.add(Calendar.DATE, -day);
         Log.e("date inicio", Utils.convertDateToString(cal.getTime()));
         try {
             URL url;
-            String date = ""; //params[0];
+            String date = "";
             HttpURLConnection urlConnection = null;
-            for(int it=0;it<day;it++){
+            for(int it=0;it<7;it++){
                 cal.add(Calendar.DATE, +1);
                 date = Utils.convertDateToString(cal.getTime());
-                Log.i("cal date",date);
+                Log.e("cal date",date);
 
                 url = new URL("http://ufam-automation.net/loislene/getRegistroByData.php?date=" + date);
                 urlConnection = (HttpURLConnection) url.openConnection();

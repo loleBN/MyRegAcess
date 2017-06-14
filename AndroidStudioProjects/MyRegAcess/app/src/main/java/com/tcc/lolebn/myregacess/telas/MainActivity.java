@@ -1,5 +1,7 @@
 package com.tcc.lolebn.myregacess.telas;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -27,6 +29,11 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private List<RegIN> lregs;
+    private ListView listViewReg;
+    private Context c;
+    private Activity act;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +41,28 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        lregs  = new ArrayList<>();
+        listViewReg = (ListView) findViewById(R.id.lvStatusIn);
+        c=this;
+        act = this;
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                try {
+                    lregs = new DownloadRegistrosNow(c).execute().get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+                AdapterRegNow adapter = new AdapterRegNow(lregs,act);
+                listViewReg.setAdapter(adapter);
+
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                 //       .setAction("Action", null).show();
             }
         });
 
@@ -52,7 +75,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        List<RegIN> lregs  = new ArrayList<>();
+
         try {
             lregs = new DownloadRegistrosNow(this).execute().get();
         } catch (InterruptedException e) {
@@ -60,9 +83,14 @@ public class MainActivity extends AppCompatActivity
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        ListView listViewReg = (ListView) findViewById(R.id.lvStatusIn);
+
         AdapterRegNow adapter = new AdapterRegNow(lregs,this);
         listViewReg.setAdapter(adapter);
+
+        if (lregs.size()==0){
+            Snackbar.make(listViewReg.getRootView(), "Registros Ausentes", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
 
     }
 
