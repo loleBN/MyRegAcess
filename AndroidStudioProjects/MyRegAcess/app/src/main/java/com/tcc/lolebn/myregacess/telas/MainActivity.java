@@ -133,15 +133,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(this, ListExpandableSemana.class);
-            startActivity(i);
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
             Intent i = new Intent(this, ListPorData.class);
             startActivity(i);
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(this, TagsCHSemanal.class);
+            Intent i = new Intent(this, ListExpandableSemana.class);
             startActivity(i);
 
         } else if (id == R.id.nav_manage) {

@@ -25,7 +25,8 @@
         <activity android:name=".telas.ListPorSemana" />
         <activity android:name=".telas.ListPorMes" />
         <activity android:name=".telas.TagsCHSemanal" />
-        <activity android:name=".telas.ListExpandableSemana"></activity>
+        <activity android:name=".telas.ListExpandableSemana" />
+        <activity android:name=".telas.ListExpandableMes"></activity>
     </application>
 
 </manifest>
