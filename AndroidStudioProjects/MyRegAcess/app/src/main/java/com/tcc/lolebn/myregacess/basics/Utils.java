@@ -14,35 +14,35 @@ import java.util.Date;
 
 public class Utils {
 	public static String convertDateToString(Date dateInString){
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        String date = null;
-        try {
-            date = format.format(dateInString);
-        } catch (Exception e) {
-        	System.out.println("Erro = "+e.getMessage());
-        }
-        return date;
-    }
-	
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		String date = null;
+		try {
+			date = format.format(dateInString);
+		} catch (Exception e) {
+			System.out.println("Erro = "+e.getMessage());
+		}
+		return date;
+	}
+
 	public static String convertDateToStringBR(Date dateInString){
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        String date = null;
-        try {
-            date = format.format(dateInString);
-        } catch (Exception e) {
-        	System.out.println("Erro = "+e.getMessage());
-        }
-        return date;
-    }
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
+		String date = null;
+		try {
+			date = format.format(dateInString);
+		} catch (Exception e) {
+			System.out.println("Erro = "+e.getMessage());
+		}
+		return date;
+	}
 	public static String getSoMes(Date dateInString) {
-        DateFormat format = new SimpleDateFormat("MM");
-        String mes = null;
-        try {
-            mes = format.format(dateInString);
-        } catch (Exception e) {
-        	System.out.println("Erro = "+e.getMessage());
-        }
-        return mes;
+		DateFormat format = new SimpleDateFormat("MM/yyyy");
+		String mes = null;
+		try {
+			mes = format.format(dateInString);
+		} catch (Exception e) {
+			System.out.println("Erro = "+e.getMessage());
+		}
+		return mes;
 	}
 	public static String getSoData(String data) {
 		Date date;
@@ -56,7 +56,7 @@ public class Utils {
 		}
 		return "";
 	}
-	
+
 	public static String getSoHorario(String data) {
 		Date date;
 		try {
@@ -82,7 +82,7 @@ public class Utils {
 	public static Date getInicioSemana() {
 		try {
 			Calendar cal = Calendar.getInstance();
-			cal.setTime(new Date());  
+			cal.setTime(new Date());
 			int day = cal.get(Calendar.DAY_OF_WEEK);
 			cal.add(Calendar.DATE, -day+1);
 			return cal.getTime();
@@ -90,6 +90,25 @@ public class Utils {
 			System.out.println("Erro = "+e.getMessage());
 		}
 		return null;
+	}
+
+	public static double getDiferencaData(String dt1, String dt2) {
+		Date dtInicial, dtFinal;
+		try {
+			dtInicial = new SimpleDateFormat("dd/MM/yyyy-HH:mm").parse(dt1);
+			dtFinal = new SimpleDateFormat("dd/MM/yyyy-HH:mm").parse(dt2);
+
+			long milisecondBegin = dtInicial.getTime();
+			long milisecondEnd = dtFinal.getTime();
+			long milisecondResult = -milisecondBegin + milisecondEnd;
+
+			return (milisecondResult /3600000.0) ;
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0.0;
 	}
 
 }

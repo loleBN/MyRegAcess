@@ -9,20 +9,20 @@ import android.widget.TextView;
 
 import com.tcc.lolebn.myregacess.R;
 import com.tcc.lolebn.myregacess.basics.RegIN;
+import com.tcc.lolebn.myregacess.basics.Tag;
 import com.tcc.lolebn.myregacess.basics.Utils;
 
 import java.util.List;
 
 /**
- * Created by lolebn on 07/06/17.
+ * Created by lolebn on 04/07/17.
  */
 
-public class AdapterRegNow extends BaseAdapter {
-
-    private final List<RegIN> registros;
+public class AdapterRegCHPorTag extends BaseAdapter {
+    private final List<Tag> registros;
     private final Activity act;
 
-    public AdapterRegNow(List<RegIN> listReg, Activity act) {
+    public AdapterRegCHPorTag(List<Tag> listReg, Activity act) {
         this.registros = listReg;
         this.act = act;
     }
@@ -45,24 +45,21 @@ public class AdapterRegNow extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = act.getLayoutInflater()
-                .inflate(R.layout.lista_registros_now, parent, false);
-        RegIN reg = registros.get(position);
+                .inflate(R.layout.lista_registros_ch, parent, false);
+        Tag reg = registros.get(position);
 
         //pegando as referências das Views
         TextView nome = (TextView)
-                view.findViewById(R.id.lista_registro_now_nome);
-        TextView entrada = (TextView)
-                view.findViewById(R.id.lista_registro_now_hora);
+                view.findViewById(R.id.lista_reg_bych_nome);
+        TextView ch = (TextView)
+                view.findViewById(R.id.lista_reg_bych_ch);
         ImageView imagem = (ImageView)
-                view.findViewById(R.id.lista_registro_now_imagem);
-        ImageView img_entrada = (ImageView)
-                view.findViewById(R.id.img_registro_now_entrada);
+                view.findViewById(R.id.lista_reg_bych_imagem);
 
         //populando as Views
         nome.setText(reg.getNome());
-        entrada.setText(Utils.getSoHorario(reg.getData_hora()));
+        ch.setText("carga horaria: "+reg.getFrequencia_semanal());
         imagem.setImageResource(R.drawable.avatar);
-        img_entrada.setImageResource(R.drawable.icon_in);
 
         return view;
     }
