@@ -59,12 +59,18 @@ public class ListPorData extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day){
                 month = month +1;
-                Log.d(TAG,"onDateSet: dd/mm/yyyy: "+ day +"/"+month+"/"+year);
-                String date = "";
-                if(month<10)
-                    date = day +"/0"+month+"/"+year;
-                else
-                    date = day +"/"+month+"/"+year;
+                String date="";
+                if(day<10) {
+                    date = date+"0" + day;
+                }else {
+                    date = date+"" + day;
+                }
+                if(month<10) {
+                    date = date+"/0" + month + "/" + year;
+                }else {
+                    date = date+"/" + month + "/" + year;
+                }
+                Log.d(TAG,"onDateSet: dd/mm/yyyy: "+ date);
                 currentDate.setText(date);
                 try {
                     lregs = new DownloadRegistroPorData(cont).execute(date).get();
@@ -101,10 +107,16 @@ public class ListPorData extends AppCompatActivity {
             monthOfYear = monthOfYear +1;
             Log.d(TAG,"onDateSet: dd/mm/yyyy: "+ dayOfMonth +"/"+monthOfYear+"/"+year);
             String date = "";
-            if(monthOfYear<10)
-                date = dayOfMonth +"/0"+monthOfYear+"/"+year;
-            else
-                date = dayOfMonth +"/"+monthOfYear+"/"+year;
+            if(dayOfMonth<10) {
+                date = date+"0" + dayOfMonth;
+            }else {
+                date = date+"" + dayOfMonth;
+            }
+            if(monthOfYear<10) {
+                date = date+"/0" + monthOfYear + "/" + year;
+            }else {
+                date = date+"/" + monthOfYear + "/" + year;
+            }
             currentDate.setText(date);
             try {
                 lregs = new DownloadRegistroPorData(cont).execute(date).get();

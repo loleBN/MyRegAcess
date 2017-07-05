@@ -63,10 +63,11 @@ public class AdapterRegPorData extends BaseAdapter {
         hora.setText(Utils.getSoHorario(reg.getData_hora()));
         imagem.setImageResource(R.drawable.avatar);
 
-        if(reg.getStatus()==1)
-            view.setBackgroundColor(view.getResources().getColor(R.color.green));
-        else
-            view.setBackgroundColor(view.getResources().getColor(R.color.red));
+        if(reg.getStatus()==1) {
+            view.setBackgroundColor(view.getResources().getColor(R.color.mediumSeaGreen));
+        }else {
+            view.setBackgroundColor(view.getResources().getColor(R.color.salmon));
+        }
         return view;
     }
 }

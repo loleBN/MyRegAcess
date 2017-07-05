@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/month_arrays"
+            android:textAlignment="center"
             android:prompt="@string/month_prompt"/>
 
         <ExpandableListView

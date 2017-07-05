@@ -131,7 +131,7 @@ public class ListExpandableSemana extends AppCompatActivity {
         String groupItem="";
         List<String> child;
         for (int i=0;i<ltags.size();i++) {
-            groupItem=ltags.get(i).getNome()+"         CH: "+ltags.get(i).getFrequencia_semanal()+"h";
+            groupItem=ltags.get(i).getNome()+"              CH: "+ltags.get(i).getFrequencia_semanal()+"h";
 
             child = new ArrayList<String>();
             for(int j=0; j<ltags.get(i).getRegistros().size();j++){

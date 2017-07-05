@@ -3,20 +3,20 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Home" />
+            android:id="@+id/nav_home"
+            android:icon="@android:drawable/ic_menu_today"
+            android:title="Now" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_day"
+            android:icon="@android:drawable/ic_menu_day"
             android:title="By Day" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:id="@+id/nav_week"
+            android:icon="@android:drawable/ic_menu_week"
             android:title="By Week" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
+            android:id="@+id/nav_month"
+            android:icon="@android:drawable/ic_menu_month"
             android:title="By Month" />
     </group>
 

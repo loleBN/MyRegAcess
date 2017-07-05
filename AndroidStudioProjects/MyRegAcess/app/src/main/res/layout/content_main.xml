@@ -17,9 +17,10 @@
         <TextView
             android:id="@+id/txtview"
             android:layout_width="match_parent"
-            android:layout_height="28dp"
+            android:layout_height="35dp"
+            android:textColor="@android:color/black"
             android:text="Lab Ambientes Inteligentes"
-            tools:layout_editor_absoluteX="82dp"
+            android:textAlignment="center"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toTopOf="parent"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>

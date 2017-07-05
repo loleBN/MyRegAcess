@@ -143,7 +143,7 @@ public class ListExpandableMes extends AppCompatActivity {
         String groupItem="";
         List<String> child;
         for (int i=0;i<ltags.size();i++) {
-            groupItem=ltags.get(i).getNome()+"         CH: "+ltags.get(i).getFrequencia_mensal()+"h";
+            groupItem=ltags.get(i).getNome()+"              CH: "+ltags.get(i).getFrequencia_mensal()+"h";
 
             child = new ArrayList<String>();
             for(int j=0; j<ltags.get(i).getRegistros().size();j++){
