@@ -32,7 +32,7 @@ public class ListPorMes extends AppCompatActivity{
 
         try {
             lregs = new DownloadRegistroPorMes(this).execute(Utils.getSoMes(new Date())).get();
-            spinner.setSelection(Integer.parseInt(Utils.getSoMes(new Date()))-1);
+            spinner.setSelection(Integer.parseInt(Utils.getMes(new Date()))-1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

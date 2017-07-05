@@ -3,9 +3,12 @@ package com.tcc.lolebn.myregacess.webservice;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.View;
 
 import com.tcc.lolebn.myregacess.basics.RegIN;
+import com.tcc.lolebn.myregacess.basics.Tag;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,14 +25,14 @@ import java.util.ArrayList;
  * Created by lolebn on 09/06/17.
  */
 
-public class DownloadRegistroPorMesCH extends AsyncTask<String, Void, ArrayList<RegIN>> {
+public class DownloadRegistroPorMesCH extends AsyncTask<String, Void, ArrayList<Tag>> {
     ProgressDialog dialog;
     Context c;
-    public static ArrayList<RegIN> registrosArray;
+    public static ArrayList<Tag> registrosTags;
 
     public DownloadRegistroPorMesCH(Context c) {
         this.c = c;
-        registrosArray = new ArrayList<>();
+        registrosTags = new ArrayList<>();
     }
 
     @Override
@@ -40,27 +43,50 @@ public class DownloadRegistroPorMesCH extends AsyncTask<String, Void, ArrayList<
 
 
     @Override
-    protected ArrayList<RegIN> doInBackground(String... params) {
+    protected ArrayList<Tag> doInBackground(String... params) {
 
         try {
             URL url;
             String mes = params[0] + "/2017";
+
+            URL urlRegs = new URL("http://ufam-automation.net/loislene/getTags.php");
             HttpURLConnection urlConnection = null;
-
-            url = new URL("http://ufam-automation.net/loislene/getRegistroMensal.php?mes=" + mes);
-            urlConnection = (HttpURLConnection) url.openConnection();
-
+            urlConnection = (HttpURLConnection) urlRegs.openConnection();
             int responseCode = urlConnection.getResponseCode();
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 String json = readStream(urlConnection.getInputStream());
                 if(!json.equals("-1")) {
-                    JSONArray regL = new JSONArray(json);
-                    JSONObject o_reg;
+                    JSONArray tagsL = new JSONArray(json);
+                    JSONObject tag;
 
-                    for (int i = 0; i < regL.length(); i++) {
-                        o_reg = new JSONObject(regL.getString(i));
-                        registrosArray.add(new RegIN(i, o_reg.getString("tag_rfid"), o_reg.getString("nome"), o_reg.getString("date_time"), o_reg.getInt("status")));
+                    for (int i = 0; i < tagsL.length(); i++) {
+
+                        ArrayList<RegIN> regs = new ArrayList<RegIN>();
+                        ArrayList<String> datas = new ArrayList<String>();
+
+                        tag = new JSONObject(tagsL.getString(i));
+                        registrosTags.add(new Tag(tag.getString("tag_rfid"), tag.getString("nome")));
+
+                        urlRegs = new URL("http://ufam-automation.net/loislene/getFHMen.php?tag_rfid="+tag.getString("tag_rfid")+"&mes=" + mes);
+                        urlConnection = (HttpURLConnection) urlRegs.openConnection();
+                        int response = urlConnection.getResponseCode();
+                        if (responseCode == HttpURLConnection.HTTP_OK) {
+                            String jsonReg = readStream(urlConnection.getInputStream());
+                            Log.e("jsonReg",jsonReg);
+                            if (!jsonReg.equals("-1")) {
+                                JSONArray regsL = new JSONArray(jsonReg);
+                                JSONObject reg;
+
+                                for (int c = 0; c < regsL.length(); c++) {
+                                    reg = new JSONObject(regsL.getString(c));
+                                    datas.add(reg.getString("dt"));
+                                    regs.add(new RegIN(-2, reg.getString("tag"), reg.getString("nome"), reg.getString("dt"), reg.getInt("status")));
+                                }
+                                registrosTags.get(i).setFrequencia_mensal(datas);
+                                registrosTags.get(i).setRegistros(regs);
+                            }
+                        }
 
                     }
                 }
@@ -71,7 +97,7 @@ public class DownloadRegistroPorMesCH extends AsyncTask<String, Void, ArrayList<
             Log.e("Erro mesmo", "Erro - " + e.getMessage());
         }
         dialog.dismiss();
-        return registrosArray;
+        return registrosTags;
     }
 
 

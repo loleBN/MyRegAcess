@@ -6,4 +6,26 @@
     android:layout_height="match_parent"
     tools:context="com.tcc.lolebn.myregacess.telas.ListExpandableMes">
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Spinner
+            android:id="@+id/spnr_meses_expan"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/month_arrays"
+            android:prompt="@string/month_prompt"/>
+
+        <ExpandableListView
+            android:id="@+id/expandableListViewMes"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="0.5dp" />
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

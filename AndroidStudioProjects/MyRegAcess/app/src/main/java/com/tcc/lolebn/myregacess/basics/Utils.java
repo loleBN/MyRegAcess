@@ -34,6 +34,16 @@ public class Utils {
 		}
 		return date;
 	}
+	public static String getMes(Date dateInString) {
+		DateFormat format = new SimpleDateFormat("MM");
+		String mes = null;
+		try {
+			mes = format.format(dateInString);
+		} catch (Exception e) {
+			System.out.println("Erro = "+e.getMessage());
+		}
+		return mes;
+	}
 	public static String getSoMes(Date dateInString) {
 		DateFormat format = new SimpleDateFormat("MM/yyyy");
 		String mes = null;

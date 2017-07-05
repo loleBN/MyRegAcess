@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.nav_manage) {
-            Intent i = new Intent(this, ListPorMes.class);
+            Intent i = new Intent(this, ListExpandableMes.class);
             startActivity(i);
         }
 

@@ -72,7 +72,6 @@ public class DownloadRegistroPorSemanaCH extends AsyncTask<Date, Void, ArrayList
 
 
         try {
-            String inputLine;
             URL urlRegs = new URL("http://ufam-automation.net/loislene/getTags.php");
             HttpURLConnection urlConnection = null;
             urlConnection = (HttpURLConnection) urlRegs.openConnection();
